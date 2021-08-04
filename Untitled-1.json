@@ -1,0 +1,9 @@
+{
+	"state": {
+		"playing": "Boolean",
+		"playingTick": "Number",
+	},
+	"nbs": {
+		
+	}
+}
