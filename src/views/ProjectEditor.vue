@@ -94,15 +94,16 @@ export default {
 
 	.toolbar {
 		width: 100%;
+		z-index: 20;
 	}
 
-	/deep/ .timeline {
+	:deep() .timeline {
 		display: grid;
 		grid-template-rows: 40px auto;
 		grid-template-columns: 180px auto;
 	}
 
-	/deep/ .no-nbs-file {
+	:deep() .no-nbs-file {
 		display: flex;
 		justify-content: center;
 		align-items: center;

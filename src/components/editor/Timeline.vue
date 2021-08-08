@@ -6,7 +6,7 @@
 		<div
 			class="timebar"
 			:style="{
-				width: `calc(var(--mass-size) * ${state.nbs.songLength})`
+				width: `calc(var(--mass-size) * ${state.nbs.songLength + 1})`
 			}">
 			Timebar
 		</div>
@@ -31,10 +31,8 @@
 						{{ note.key }}
 					</div>
 				</template>
-				<div class="playing-line" :style="{
-					left: `calc(var(--mass-size) * ${state.playingTick})`
-				}"></div>
 			</div>
+			<playing-line />
 		</div>
 	</f-flex-wrapper>
 </template>
@@ -44,10 +42,11 @@ import { inject, ref, onMounted, reactive, computed } from 'vue';
 
 import FText from '../parts/FText.vue';
 import FFlexWrapper from '../parts/FFlexWrapper.vue';
+import PlayingLine from './PlayingLine.vue';
 
 export default {
 	name: 'Timeline',
-	components: { FFlexWrapper, FText },
+	components: { FFlexWrapper, FText, PlayingLine },
 	setup () {
 		const state = inject('state');
 		const player = inject('player');
@@ -149,7 +148,8 @@ export default {
 		background-size: 40px 100%;
 		background-repeat: repeat;
 		background-attachment: local;
-		
+		position: relative;
+
 		.layer {
 			height: var(--mass-size);
 			width: 100%;
@@ -169,12 +169,5 @@ export default {
 		}
 	}
 
-	.playing-line {
-		position: absolute;
-		top: 0;
-		background-color: red;
-		width: 1px;
-		height: 100%;
-	}
 }
 </style>
