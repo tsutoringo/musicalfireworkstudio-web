@@ -8,19 +8,7 @@
 		@dragover="onDragover($event)"
 		@dragleave="dragging = false"
 		@drop="onDrop($event)">
-		<f-toolbar>
-			<f-toggle-button v-model="state.playing" :disabled="!state.loaded">
-				<template #on><g-icon icon="pause" /></template>
-				<template #off><g-icon icon="play_arrow" /></template>
-			</f-toggle-button>
-			<f-button :disabled="!state.loaded" @click="stopPlay()">
-				<g-icon icon="stop" />
-			</f-button>
-			<f-vhr />
-			<template v-if="state.loaded">
-				<input type="text" v-model="state.nbs.song.tempo">
-			</template>
-		</f-toolbar>
+		<f-toolbar />
 		<f-timeline v-if="state.loaded" />
 		<f-flex-wrapper v-else classes="no-nbs-file">
 			<g-icon icon="music_note" class="icon"/>
