@@ -1,19 +1,25 @@
 <template>
-	<button class="f-button">
+	<button class="f-button" :class="{ off }">
 		<slot />
 	</button>
 </template>
 
 <script>
 export default {
-	name: 'FButton'
+	name: 'FButton',
+	props: {
+		off: {
+			type: Boolean,
+			default: false
+		}
+	}
 };
 </script>
 
 <style lang="scss" scoped>
 button {
 	padding: 0;
-	margin: 4px;
+	margin: 2px;
 	background-color: transparent;
 	border: none;
 	user-select: none;
@@ -32,6 +38,10 @@ button {
 	&:disabled {
 		color: #CFD8DC;
 		cursor: default;
+	}
+
+	&.off {
+		color: #949a9c;
 	}
 }
 </style>
