@@ -1,12 +1,13 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import Home from '../views/ProjectHome.vue';
+// import Home from '../views/ProjectHome.vue';
 import Editor from '../views/ProjectEditor.vue';
 
 const routes = [
 	{
 		path: '/',
 		name: 'ProjectHome',
-		component: Home
+		redirect: '/editor'
+		// component: Home
 	}, {
 		path: '/editor',
 		name: 'Editor',
