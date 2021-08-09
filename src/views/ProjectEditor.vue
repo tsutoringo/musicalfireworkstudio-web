@@ -27,14 +27,11 @@ import nbsParser from '../util/nbsParser';
 import FTimeline from '../components/editor/Timeline.vue';
 import GIcon from '../components/icon/GIconRound.vue';
 import FToolbar from '../components/editor/Toolbar.vue';
-import FButton from '../components/parts/FButton.vue';
-import FToggleButton from '../components/parts/FToggleButton.vue';
-import FVhr from '../components/parts/FVhr.vue';
 import FFlexWrapper from '../components/parts/FFlexWrapper.vue';
 
 export default {
 	name: 'ProjectEditor',
-	components: { FTimeline, GIcon, FToolbar, FButton, FToggleButton, FVhr, FFlexWrapper },
+	components: { FTimeline, GIcon, FToolbar, FFlexWrapper },
 	setup () {
 		const state = inject('state');
 		const massSize = inject('massSize');
@@ -56,17 +53,11 @@ export default {
 			});
 		};
 
-		const stopPlay = () => {
-			state.playing = false;
-			state.playingTick = 0;
-		};
-
 		return {
 			state,
 			dragging,
 			onDragover,
 			onDrop,
-			stopPlay,
 			massSize
 		};
 	}
