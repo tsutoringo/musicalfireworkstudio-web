@@ -13,8 +13,12 @@ export default {
 		const tick = () => {
 			return state.currentPlaying = setInterval(() => {
 				if (!player.playTick(state.nbs, state.playingTick)) {
+					if (!state.nbs.loop.enable) {
+						state.playing = false;
+						return;
+					}
+
 					state.playingTick = 0;
-					if (!state.nbs.loop.enable) stop();
 				} else {
 					state.playingTick++;
 				}
