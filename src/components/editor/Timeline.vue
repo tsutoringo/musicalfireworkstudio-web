@@ -20,16 +20,7 @@
 		}">
 			<div class="layer" v-for="(layer, i) in state.nbs.layers" :key="i">
 				<template  v-for="(note, j) in layer.notes.slice(viewNotes.start, viewNotes.end)" :key="j">
-					<div
-						class="note"
-						v-if="note"
-						:style="{
-							left: `calc(var(--mass-size) * ${note.tick})`,
-							// backgroundImage: player.instruments[note.instrument] ? `url(${player.instruments[note.instrument].icon})` : ''
-						}"
-					>
-						{{ note.key }}
-					</div>
+					<note v-if="note" :note="note" />
 				</template>
 			</div>
 			<playing-line />
@@ -43,15 +34,16 @@ import { inject, ref, onMounted, reactive, computed } from 'vue';
 import FText from '../parts/FText.vue';
 import FFlexWrapper from '../parts/FFlexWrapper.vue';
 import PlayingLine from './PlayingLine.vue';
+import Note from './Note.vue';
 
 export default {
 	name: 'Timeline',
-	components: { FFlexWrapper, FText, PlayingLine },
+	components: { FFlexWrapper, FText, PlayingLine, Note },
 	setup () {
 		const state = inject('state');
 		const player = inject('player');
 		const timelineWrapper = ref(null);
-		let timeline = computed(() => timelineWrapper.value.$el.querySelector('.timeline'));
+		const timeline = computed(() => timelineWrapper.value.$el.querySelector('.timeline'));
 
 		const viewNotes = reactive({
 			start: 0,
@@ -94,6 +86,10 @@ export default {
 		background-color: white;
 	}
 
+	.current-time, .timebar, .layers {
+		background-color: #F5F5F5;
+	}
+
 	.current-time {
 		grid-row: 1 / 2;
 		grid-column: 1 / 2;
@@ -115,6 +111,7 @@ export default {
 
 		display: flex;
 		align-items: center;
+
 	}
 	.layers {
 		grid-row: 2 / 3;
@@ -154,18 +151,6 @@ export default {
 			height: var(--mass-size);
 			width: 100%;
 			position: relative;
-
-			.note {
-				position: absolute;
-				width: var(--mass-size);
-				height: var(--mass-size);
-				text-align: center;
-				background-size: cover;
-				image-rendering: pixelated;
-
-				color: white;
-				text-shadow: 0 0 2px black;
-			}
 		}
 	}
 
