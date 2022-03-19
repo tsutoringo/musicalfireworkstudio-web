@@ -4,7 +4,7 @@
 		v-if="note"
 		:style="{
 			left: `calc(var(--mass-size) * ${note.tick})`,
-			// backgroundImage: player.instruments[note.instrument] ? `url(${player.instruments[note.instrument].icon})` : ''
+			backgroundImage: player.instruments[note.instrument] ? `url(${player.instruments[note.instrument].icon})` : ''
 		}"
 	>
 		{{ note.key }}
@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import { inject } from 'vue';
+
 export default {
 	name: 'Note',
 	props: {
@@ -19,6 +21,13 @@ export default {
 			type: Object,
 			required: true
 		}
+	},
+	setup () {
+		const player = inject('player');
+
+		return {
+			player
+		};
 	}
 };
 </script>
@@ -33,7 +42,7 @@ export default {
 	image-rendering: pixelated;
 	color: black;
 	box-sizing: border-box;
-	border: 1px solid #703d29;
+	/* border: 1px solid #703d29; */
 	cursor: pointer;
 
 	user-select: none;
